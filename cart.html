@@ -201,6 +201,11 @@
 
         <div class="header-user-actions">
 
+          <!--
+            - ACCOUNT MENU (added) — signed out: click routes straight to
+            - login.html. Signed in: click opens this dropdown instead.
+            - Wired in auth.js (wireAccountIcon).
+          -->
           <div class="account-menu-wrapper" data-account-menu-wrapper>
             <button class="action-btn" data-account-trigger>
               <ion-icon name="person-outline"></ion-icon>
@@ -750,6 +755,10 @@
 
   </header>
   <main class="page-main">
+
+    <!--
+      - CART PAGE (state lives in cart.js; this just renders it — see cart-page.js)
+    -->
 
     <div class="container">
 

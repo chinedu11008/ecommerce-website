@@ -1,3 +1,11 @@
+/**
+ * signup.js
+ * -----------------------------------------------------------------------
+ * Powers signup.html's form. Calls signup() from auth.js to create a new
+ * local account (name/email/hashed password) and sign the visitor in
+ * immediately, then redirects the same way login.js does.
+ */
+
 import { signup, getCurrentUser, getPostLoginRedirect } from './auth.js';
 
 function showError(message) {

@@ -1,3 +1,13 @@
+/**
+ * search.js
+ * -----------------------------------------------------------------------
+ * Powers search.html. Reads ?q= from the URL and runs it through
+ * search()  in data/products.js (a simple case-insensitive substring
+ * match across product titles/descriptions/category and category
+ * names), then renders both result sets. The header search box that
+ * sends visitors here lives in header-search.js, not this file.
+ */
+
 import { search } from './data/products.js';
 import { formatMoney } from './cart.js';
 

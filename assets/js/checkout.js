@@ -1,3 +1,15 @@
+/**
+ * checkout.js
+ * -----------------------------------------------------------------------
+ * Powers checkout.html. Renders the order summary from the current cart,
+ * validates the shipping/payment form (native HTML5 validation via
+ * form.checkValidity() — no server round-trip), and on submit creates a
+ * demo order (orders.js) and clears the cart. IMPORTANT: no payment is
+ * actually processed here — there's no payment gateway wired up, the
+ * card fields are collected and then simply discarded. Don't point this
+ * at real customers/real cards without replacing this step.
+ */
+
 import { readCart, getSubtotal, formatMoney, clearCart } from './cart.js';
 import { getCurrentUser } from './auth.js';
 import { createOrder } from './orders.js';
@@ -52,6 +64,8 @@ function handleSubmit(e) {
   clearError();
 
   const form = e.target;
+  // Native HTML5 validation only (required fields, email format, etc.) —
+  // the browser handles showing which field is wrong via reportValidity().
   if (!form.checkValidity()) {
     form.reportValidity();
     return;
@@ -77,6 +91,10 @@ function handleSubmit(e) {
   const user = getCurrentUser();
   const total = getSubtotal();
 
+  // NOTE: this is the entire "payment" step. The card fields above are
+  // validated for shape (see checkout.html's input patterns) but never
+  // read here — nothing is charged, nothing is sent anywhere. Placing
+  // the order and clearing the cart happens unconditionally.
   createOrder({
     userId: user ? user.id : null,
     items: items.map((i) => ({ id: i.id, title: i.title, price: i.price, qty: i.qty })),

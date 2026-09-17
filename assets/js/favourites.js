@@ -1,3 +1,14 @@
+/**
+ * favourites.js
+ * -----------------------------------------------------------------------
+ * Powers favourites.html — renders the saved-products grid from
+ * wishlist.js's localStorage-backed list. Looks each saved id up in the
+ * catalog for full details (price/rating/etc.); falls back to whatever
+ * was captured at save-time for products that aren't in the catalog
+ * (shouldn't normally happen now that the whole site reads from one
+ * catalog, but keeps this page from breaking if it ever does).
+ */
+
 import { readWishlist, removeFavourite } from './wishlist.js';
 import { getProductById } from './data/products.js';
 import { formatMoney } from './cart.js';

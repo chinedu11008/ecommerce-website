@@ -1,3 +1,11 @@
+/**
+ * compare-page.js
+ * -----------------------------------------------------------------------
+ * Powers compare.html — builds the side-by-side table from compare.js's
+ * localStorage-backed list of up to 4 product ids (see MAX_COMPARE
+ * there). Each column reads full product details from the catalog by id.
+ */
+
 import { readCompare, removeFromCompare } from './compare.js';
 import { getProductById } from './data/products.js';
 import { addItem, formatMoney } from './cart.js';

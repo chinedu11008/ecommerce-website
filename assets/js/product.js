@@ -1,3 +1,14 @@
+/**
+ * product.js
+ * -----------------------------------------------------------------------
+ * Powers product.html — reads the ?id= from the URL, looks the product
+ * up in the catalog (data/products.js), and fills in the page: gallery,
+ * title, price, description, star rating, quantity stepper, Add to Cart
+ * (cart.js), and the favourite/heart toggle (wishlist.js). If the id
+ * doesn't match anything in the catalog, shows the "not found" state
+ * instead of a half-filled page.
+ */
+
 import { getProductById, getCategory } from './data/products.js';
 import { addItem, formatMoney } from './cart.js';
 import { toggleFavourite, isFavourited } from './wishlist.js';

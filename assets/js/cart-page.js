@@ -1,3 +1,13 @@
+/**
+ * cart-page.js
+ * -----------------------------------------------------------------------
+ * Powers cart.html — renders the line-item list and totals from
+ * cart.js's localStorage-backed state, and wires the quantity +/-  and
+ * remove buttons. cart.js itself (imported here) is what every page's
+ * "add to cart" bag icon writes to, so this just has to read and re-draw
+ * it; it doesn't own the cart data itself.
+ */
+
 import { readCart, setQty, removeItem, getSubtotal, formatMoney } from './cart.js';
 import { t } from './i18n.js';
 

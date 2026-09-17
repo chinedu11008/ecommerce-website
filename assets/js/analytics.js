@@ -1,3 +1,13 @@
+/**
+ * analytics.js
+ * -----------------------------------------------------------------------
+ * Powers analytics.html (reached from the header's Profile dropdown once
+ * signed in). Computes simple stats — order count, total spent, average
+ * order, most-ordered category — entirely client-side from the signed-in
+ * visitor's own order history (orders.js). There's no real analytics
+ * backend; this is just arithmetic over localStorage data, per browser.
+ */
+
 import { requireAuth, logout } from './auth.js';
 import { getOrdersForUser } from './orders.js';
 import { getProductById } from './data/products.js';

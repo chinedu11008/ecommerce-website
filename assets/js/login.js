@@ -1,3 +1,13 @@
+/**
+ * login.js
+ * -----------------------------------------------------------------------
+ * Powers login.html's form. Calls login() from auth.js (which hashes the
+ * password and checks it against the stored account) and, on success,
+ * sends the visitor wherever they were trying to go before they got
+ * bounced here — see getPostLoginRedirect() / the ?next= param that
+ * requireAuth()/requireAdmin() and the header profile icon attach.
+ */
+
 import { login, getCurrentUser, getPostLoginRedirect } from './auth.js';
 
 function showError(message) {

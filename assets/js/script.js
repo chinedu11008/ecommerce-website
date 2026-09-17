@@ -1,3 +1,20 @@
+/**
+ * script.js
+ * -----------------------------------------------------------------------
+ * Part of the ORIGINAL "Affinity" template — handles the four bits of UI
+ * the template shipped with: the newsletter modal, the fake "someone just
+ * bought this" toast, the mobile slide-out menu, and the sidebar filter
+ * accordion. Loaded as a plain classic script (not a module) on every
+ * page, before all the newer feature scripts below it.
+ *
+ * Everything added on top of the template (cart, auth, categories,
+ * search, etc.) lives in separate ES modules alongside this file — see
+ * cart.js, auth.js, i18n.js, currency.js, wishlist.js, compare.js,
+ * quickview.js, carousel.js, header-search.js, and newsletter.js (which
+ * adds the "remember that I closed this" behavior this file doesn't
+ * have). This file itself is left close to how the template shipped it.
+ */
+
 'use strict';
 
 // modal variables
@@ -58,6 +75,8 @@ for (let i = 0; i < mobileMenuOpenBtn.length; i++) {
 
 
 // accordion variables
+// (this is the collapsible category/price/brand filter list in the
+// homepage's product sidebar — data-accordion-btn is each section header)
 const accordionBtn = document.querySelectorAll('[data-accordion-btn]');
 const accordion = document.querySelectorAll('[data-accordion]');
 

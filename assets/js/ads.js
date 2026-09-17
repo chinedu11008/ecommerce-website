@@ -1,3 +1,13 @@
+/**
+ * ads.js
+ * -----------------------------------------------------------------------
+ * Powers ads.html (reached from the header's Profile dropdown). A demo
+ * "ad campaign manager": creating a campaign stores {name, budget} in
+ * localStorage and derives plausible-looking impressions/clicks from the
+ * budget with a fixed formula (NOT random, NOT real — nothing here talks
+ * to an actual ad network). Good enough to demo the UI/flow.
+ */
+
 import { requireAuth, logout } from './auth.js';
 
 const ADS_KEY = 'affinity_ad_campaigns';

@@ -1,3 +1,17 @@
+/**
+ * admin.js
+ * -----------------------------------------------------------------------
+ * Powers admin.html. Guarded by requireAdmin() (auth.js) — redirects
+ * anyone who isn't signed in as the demo admin account back to
+ * index.html. Renders four tab panels from the same in-browser data used
+ * everywhere else on the site: orders.js (all orders, any customer),
+ * auth.js (all registered users), and the static PRODUCTS catalog.
+ *
+ * The Products and Customers tabs are READ-ONLY — there's no add/edit/
+ * delete here yet. Orders is the one editable bit: the status <select>
+ * in each row calls updateOrderStatus() and persists immediately.
+ */
+
 import { requireAdmin, logout, getAllUsers } from './auth.js';
 import { getAllOrders, updateOrderStatus } from './orders.js';
 import { PRODUCTS } from './data/products.js';
@@ -11,6 +25,7 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+// The four stat cards at the top of the Overview tab.
 function renderOverview(orders, users) {
   const revenue = orders.reduce((sum, o) => sum + o.total, 0);
   const customers = users.filter((u) => u.role !== 'admin');
@@ -43,6 +58,8 @@ function renderOrders(orders, users) {
     })
     .join('') || '<tr><td colspan="6">No orders yet.</td></tr>';
 
+  // Changing an order's status writes straight through to localStorage;
+  // there's no "save" step and no server round-trip to wait on.
   tbody.querySelectorAll('[data-order-status]').forEach((select) => {
     select.addEventListener('change', () => {
       updateOrderStatus(select.dataset.orderStatus, select.value);
@@ -50,6 +67,10 @@ function renderOrders(orders, users) {
   });
 }
 
+// Read-only listing of the static catalog (assets/js/data/products.js).
+// There's no admin "add product" flow yet — see the project README for
+// why (it means deciding how admin-added products persist alongside the
+// static catalog file).
 function renderProducts() {
   const tbody = document.querySelector('[data-admin-products-body]');
   if (!tbody) return;
@@ -77,6 +98,8 @@ function renderCustomers(users, orders) {
   }).join('') || '<tr><td colspan="3">No customers yet.</td></tr>';
 }
 
+// Simple show/hide tab switcher for the four dashboard panels — no
+// routing involved, every panel is already in the DOM (see admin.html).
 function wireTabs() {
   const buttons = document.querySelectorAll('[data-tab]');
   const panels = document.querySelectorAll('[data-panel]');
@@ -91,7 +114,7 @@ function wireTabs() {
 
 document.addEventListener('DOMContentLoaded', () => {
   const admin = requireAdmin();
-  if (!admin) return; // already redirected
+  if (!admin) return; // requireAdmin() already redirected non-admins away
 
   document.querySelectorAll('[data-user-name]').forEach((el) => { el.textContent = admin.name; });
   document.querySelectorAll('[data-user-initials]').forEach((el) => {
@@ -107,6 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCustomers(users, orders);
   wireTabs();
 
+  // Products/orders/revenue all show dollar amounts, so re-paint them
+  // (not Customers, which has none) when the currency selector changes.
   window.addEventListener('currency:change', () => {
     renderOverview(orders, users);
     renderOrders(orders, users);
